@@ -10,18 +10,15 @@ import os
 class CORSRequestHandler (SimpleHTTPRequestHandler):
     def end_headers (self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        if self.datafile:
+        if hasattr(self,"datafile"):
           self.send_header('datafile', self.datafile)
         SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
-        print(self)
-        print(self.path)
         if self.path == "/latest":
           datafiles = [d for d in os.listdir() if d[-4:] == ".txt"]
           datafiles.sort()
           last = datafiles[-1]
-          print(self.headers)
           self.path = "/"+last
           self.datafile = last
 
