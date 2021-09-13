@@ -65,7 +65,12 @@ function loadData(url) {
 }
 
 function load() {
-  var file=new URLSearchParams(location.search).get("file");
+  if (params.has("title")) {
+    document.title = params.get("title");
+    document.getElementById("title").innerHTML = params.get("title");
+  }
+
+  var file=params.get("file");
   if (!file) {
     file = prompt("A data file (/url) is needed:", "data.txt");
     const url = new URL(window.location);
@@ -86,5 +91,13 @@ if (refreshSecs) {
 <body onload="load()">
 <style>
 canvas { height: 100px; }
+.row {
+  display: flex;
+  justify-content: center;
+}
+.title { font-size: 2rem; font-family: sans; } 
 </style>
+<div class=row>
+<div class=title id=title></div>
+</div>
 <canvas id="myChart" width="1000" height="400"></canvas>
