@@ -1,0 +1,5 @@
+# m h  dom mon dow   command
+
+@reboot   cd /home/pi/Code/pi_aq_fork && sleep 1 && ./dynamicserver.py >> cron.log 2>&1  & 
+@reboot   cd /home/pi/Code/pi_aq_fork && ./log.sh           1 desk >> cron.log 2>&1 &
+0 0 * * * cd /home/pi/Code/pi_aq_fork && ./log.sh --restart 1 desk >> cron.log 2>&1 &
